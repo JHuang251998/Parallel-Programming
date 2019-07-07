@@ -5,7 +5,6 @@
 #include<math.h>
 
 int compare(const void * a, const void * b);
-//https://stackoverrun.com/cn/q/6475235
 void mergeArrays(float * arr, float * send_arr, float * double_arr, float * new_send_arr, int own_size, int recv_size);
 
 int main(int argc, char** argv) {
