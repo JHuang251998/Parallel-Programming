@@ -128,19 +128,19 @@ void mergeArrays(float * arr, float * send_arr, float * double_arr, float * new_
 	j = 0;
 	k = 0;
 	
-	for(i = 0; i < own_size; i++) {
-		while(arr[i] > send_arr[j] && j < recv_size) {
-			double_arr[k] = send_arr[j];
-			j++;
-			k++;
+	for(i = 0; i < own_size+recv_size; i++) {
+		if(j == own_size) {
+			double_arr[i] = send_arr[k++];
 		}
-		double_arr[k] = arr[i];
-		k++;
-	}
-	while(j < recv_size) {
-		double_arr[k] = send_arr[j];
-		k++;
-		j++;
+		else if(k == recv_size)  {
+			double_arr[i] = arr[j++];
+		}
+		else if (arr[j] < send_arr[k]) {
+			double_arr[i] = arr[j++];
+		}
+		else {
+			double_arr[i] = send_arr[k++];
+		}
 	}
 	
 	for(i = 0; i < own_size; i++) {
